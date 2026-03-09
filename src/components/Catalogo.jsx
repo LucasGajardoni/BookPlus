@@ -4,7 +4,6 @@ function Catalogo() {
     return (
         <section className="container py-5">
 
-            {/* TOPO */}
             <div className="d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-4 mb-5">
 
                 <div>
@@ -36,9 +35,10 @@ function Catalogo() {
 
             </div>
 
-            {/* GRID DE LIVROS */}
             <div className="row g-4">
 
+                <BookCard />
+                <BookCard />
                 <BookCard />
                 <BookCard />
                 <BookCard />
@@ -52,7 +52,7 @@ function Catalogo() {
 
             </div>
 
-            {/* BOTÃO FINAL */}
+
             <div className="text-center mt-5">
                 <button className="catalog-btn">
                     Ver Catálogo Completo
