@@ -1,29 +1,26 @@
 import {Link} from "react-router-dom";
 
-function BookCard() {
+function BookCard({livro}) {
     return (
         <div className="col-6 col-md-4 col-lg-3 col-xl-2 mb-5">
             <div className="book-card">
                 <div className="book-image-wrapper">
-                    <Link to="/livro/1" className="text-decoration-none">
-                    <img
-                        src="https://images.unsplash.com/photo-1544947950-fa07a98d237f"
-                        alt="Livro"
-                    />
-                        </Link>
+                    <Link to={`/livro/${livro.id}`} className="text-decoration-none">
+                        <img src={livro.imagem} alt={livro.titulo} />
+                    </Link>
                 </div>
 
                 <div className="book-info">
-          <span className="book-category">
-            Poesia
-          </span>
+            <span className="book-category">
+                {livro.categoria}
+            </span>
 
                     <h6 className="book-title">
-                        O Silêncio do Mar
+                        {livro.titulo}
                     </h6>
 
                     <p className="book-author">
-                        Helena Vasconcelos
+                        {livro.autor}
                     </p>
                 </div>
             </div>
