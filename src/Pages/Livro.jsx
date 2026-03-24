@@ -1,8 +1,25 @@
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Livro() {
 
     const { id } = useParams();
+    const [livro, setLivro] = useState(null);
+
+    async function buscarLivro() {
+        const response = await fetch(`https://apps-api-livros.ucxocw.easypanel.host/livro/${id}`);
+        const data = await response.json();
+
+        setLivro(data.livro);
+    }
+
+    useEffect(function () {
+        buscarLivro();
+    }, []);
+
+    if (!livro) {
+        return <div className="container py-5">Carregando...</div>;
+    }
 
     return (
         <div className="container py-5">
@@ -10,38 +27,18 @@ function Livro() {
             <div className="row align-items-center">
 
                 <div className="col-md-4 text-center mb-4">
-                    <img
-                        src="https://images.unsplash.com/photo-1544947950-fa07a98d237f"
-                        alt="Livro"
-                        className="img-fluid rounded shadow"
-                        style={{ maxHeight: "400px" }}
-                    />
+                    <img src={livro.imagem} className="img-fluid rounded shadow" />
                 </div>
 
                 <div className="col-md-8">
 
-                    <h2 className="mb-3">1984</h2>
+                    <h2>{livro.titulo}</h2>
 
-                    <p className="text-muted mb-4">
-                        Uma história distópica que mostra uma sociedade controlada por um
-                        governo totalitário onde tudo é vigiado.
-                    </p>
+                    <p className="text-muted">{livro.descricao}</p>
 
-                    <div className="mb-2">
-                        <strong>Autor:</strong> George Orwell
-                    </div>
-
-                    <div className="mb-2">
-                        <strong>Categoria:</strong> Ficção
-                    </div>
-
-                    <div className="mb-2">
-                        <strong>Faixa Etária:</strong> 14+
-                    </div>
-
-                    <div className="mt-4">
-                        <strong>ID do livro:</strong> {id}
-                    </div>
+                    <p><strong>Autor:</strong> {livro.autor}</p>
+                    <p><strong>Categoria:</strong> {livro.categoria}</p>
+                    <p><strong>Faixa Etária:</strong> {livro.faixa_etaria}</p>
 
                 </div>
 
